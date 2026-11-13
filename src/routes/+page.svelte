@@ -84,7 +84,14 @@
 
 <label>
   {t('nationalIdNumber')}:
-  <input type="text" placeholder="25012030200552" bind:value={nationalID} />
+  <!-- svelte-ignore a11y_autofocus -->
+  <input
+    type="text"
+    placeholder="25012030200552"
+    bind:value={nationalID}
+    autofocus
+    onfocus={(e) => e.currentTarget.select()}
+  />
 </label>
 
 <div class="result">
