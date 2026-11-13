@@ -27,4 +27,4 @@ export const governorateCodes = {
   '34': 'Northern Sinai',
   '35': 'Southern Sinai',
   '88': 'Abroad',
-};
+} as const;
