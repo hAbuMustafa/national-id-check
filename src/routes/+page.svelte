@@ -158,7 +158,7 @@
       position: absolute;
       inset-inline-end: 0;
       margin-block-end: 1rem;
-      background-color: alpha(from #fff / 0.1);
+      background-color: light-dark(alpha(from gray / 0.4), alpha(from #fff / 0.1));
       border-radius: 4px;
       padding: 0.25rem;
     }
@@ -167,19 +167,20 @@
       display: none;
     }
 
+    span {
+      border-radius: 4px;
+      padding: 0.25rem;
+    }
+
     &:has(input:checked) {
       .ar {
-        background-color: inherit;
-        border-radius: 4px;
-        padding: 0.25rem;
+        background-color: light-dark(gray, alpha(from #fff / 0.1));
       }
     }
 
     &:has(input:not(:checked)) {
       .en {
-        background-color: inherit;
-        border-radius: 4px;
-        padding: 0.25rem;
+        background-color: light-dark(gray, alpha(from #fff / 0.1));
       }
     }
   }
