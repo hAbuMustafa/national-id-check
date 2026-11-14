@@ -101,9 +101,7 @@
     </div>
   {/if}
 
-  {#if nationalID.length === 14 && !extracted}
-    <p class="error">{t('incorrectNumber')}</p>
-  {:else if nationalID.length === 14 && extracted}
+  {#if nationalID.length === 14 && extracted}
     <table>
       <thead>
         <tr>
