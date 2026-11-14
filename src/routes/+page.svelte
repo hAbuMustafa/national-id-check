@@ -85,6 +85,7 @@
     type="text"
     placeholder="25012030200552"
     inputmode="numeric"
+    maxlength="14"
     bind:value={nationalID}
     autofocus
     onfocus={(e) => e.currentTarget.select()}
