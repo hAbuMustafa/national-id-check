@@ -76,23 +76,22 @@
   </label>
 </nav>
 
-<h1>{t('title')}</h1>
+<div class="wrapper">
+  <h1>{t('title')}</h1>
 
-<label>
-  {t('nationalIdNumber')}:
-  <!-- svelte-ignore a11y_autofocus -->
-  <input
-    type="text"
-    placeholder="25012030200552"
-    inputmode="numeric"
-    maxlength="14"
-    bind:value={nationalID}
-    autofocus
-    onfocus={(e) => e.currentTarget.select()}
-  />
-</label>
-
-<div class="result">
+  <label>
+    {t('nationalIdNumber')}:
+    <!-- svelte-ignore a11y_autofocus -->
+    <input
+      type="text"
+      placeholder="25012030200552"
+      inputmode="numeric"
+      maxlength="14"
+      bind:value={nationalID}
+      autofocus
+      onfocus={(e) => e.currentTarget.select()}
+    />
+  </label>
   {#if nationalID.length === 14 && (!extracted || !values?.checks.result)}
     <div class="error">
       {t('incorrectNumber')}
@@ -187,7 +186,7 @@
     text-align: center;
   }
 
-  .result {
+  .wrapper {
     margin-block-start: 1rem;
     display: grid;
     gap: 1rem;
