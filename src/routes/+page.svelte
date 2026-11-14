@@ -54,15 +54,19 @@
   let values = $derived.by(() => {
     if (!extracted) return;
 
-    const birthdate = Temporal.PlainDate.from(
-      `${extracted.birthCentury === '2' ? '19' : '20'}${extracted.birthYear}-${extracted.birthMonth}-${extracted.birthDay}`,
-    );
+    try {
+      const birthdate = Temporal.PlainDate.from(
+        `${extracted.birthCentury === '2' ? '19' : '20'}${extracted.birthYear}-${extracted.birthMonth}-${extracted.birthDay}`,
+      );
 
-    const age = birthdate.until(Temporal.Now.plainDateISO(), { largestUnit: 'year' });
+      const age = birthdate.until(Temporal.Now.plainDateISO(), { largestUnit: 'year' });
 
-    const checks = verifyEgyptianNationalId(nationalID);
+      const checks = verifyEgyptianNationalId(nationalID);
 
-    return { birthdate, age, checks };
+      return { birthdate, age, checks };
+    } catch (err) {
+      return;
+    }
   });
 </script>
 
@@ -92,13 +96,14 @@
       onfocus={(e) => e.currentTarget.select()}
     />
   </label>
-  {#if nationalID.length === 14 && (!extracted || !values?.checks.result)}
+
+  {#if nationalID.length === 14 && (!extracted || !values || !values?.checks.result)}
     <div class="error">
       {t('incorrectNumber')}
     </div>
   {/if}
 
-  {#if nationalID.length === 14 && extracted}
+  {#if nationalID.length === 14 && extracted && values}
     <h2 class="number" dir="ltr">
       {extracted.birthCentury} <span class="birthdate">{extracted.birthdate}</span>
       <span class="birth-governorate">{extracted.governorate}</span>
