@@ -9,4 +9,5 @@ export default {
   incorrectNumber: 'Incorrect National ID Number',
   male: 'Male',
   female: 'female',
+  toggleLanguage: 'تغيير اللغة من الإنجليزية إلى العربية',
 };

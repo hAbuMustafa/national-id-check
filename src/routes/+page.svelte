@@ -67,11 +67,7 @@
 </script>
 
 <nav>
-  <label
-    title="{!isArabic ? 'تغيير اللغة من ' : 'toggle language from'} {!isArabic
-      ? 'العربية'
-      : 'English'} {!isArabic ? 'إلى' : 'to'} {!isArabic ? 'الإنجليزية' : 'Arabic'}"
-  >
+  <label title={t('toggleLanguage')}>
     <span class="labels">
       <span class="en">En</span>
       <span class="ar">ع</span>

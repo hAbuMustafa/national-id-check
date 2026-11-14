@@ -12,6 +12,7 @@ export default {
   incorrectNumber: 'رقم قومي غير صحيح',
   male: 'ذكر',
   female: 'أنثى',
+  toggleLanguage: 'Toggle Language from Arabic to English',
 
   Cairo: 'القاهرة',
   Alexandria: 'الإسكندرية',
