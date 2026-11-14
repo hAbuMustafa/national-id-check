@@ -94,6 +94,12 @@
   />
 </label>
 
+{#if nationalID.length === 14 && (!extracted || !values?.checks.result)}
+  <div class="error">
+    {t('incorrectNumber')}
+  </div>
+{/if}
+
 <div class="result">
   {#if nationalID.length === 14 && extracted === undefined}
     <p class="error">{t('incorrectNumber')}</p>
