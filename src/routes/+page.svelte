@@ -102,6 +102,13 @@
   {/if}
 
   {#if nationalID.length === 14 && extracted}
+    <h2 class="number" dir="ltr">
+      {extracted.birthCentury} <span class="birthdate">{extracted.birthdate}</span>
+      <span class="birth-governorate">{extracted.governorate}</span>
+      {nationalID.slice(9, 12)} <span class="gender">{extracted.gender}</span>
+      <span class="checksum">{extracted.checksum}</span>
+    </h2>
+
     <table>
       <thead>
         <tr>
@@ -114,7 +121,7 @@
       </thead>
       <tbody>
         <tr>
-          <td>{values!.birthdate.toString()}</td>
+          <td class="birthdate">{values!.birthdate.toString()}</td>
           <td>
             {values!.age.years}
             {t('years')}
@@ -123,13 +130,14 @@
             {values!.age.days}
             {t('days')}
           </td>
-          <td>{t(governorateCodes[extracted.governorate])}</td>
-          <td
+          <td class="birth-governorate">{t(governorateCodes[extracted.governorate])}</td>
+          <td class="gender"
             >{Number(extracted.gender) % 2 === 0
               ? `${t('female')} ♀️`
               : `${t('male')} ♂️`}</td
           >
           <td
+            class="checksum"
             class:error={!values?.checks.result}
             title={!values?.checks.result ? `${values?.checks.calculatedChecksum}` : null}
           >
@@ -189,6 +197,30 @@
 
     @media (width >= 700px) {
       padding-inline: 20vw;
+    }
+
+    h2 {
+      margin-block: 0;
+
+      span {
+        border-radius: 4px;
+      }
+    }
+
+    &:has(.birthdate:hover) .birthdate {
+      background-color: alpha(from limegreen / 0.5);
+    }
+
+    &:has(.birth-governorate:hover) .birth-governorate {
+      background-color: alpha(from royalblue / 0.5);
+    }
+
+    &:has(.gender:hover) .gender {
+      background-color: alpha(from pink / 0.5);
+    }
+
+    &:has(.checksum:hover) .checksum {
+      background-color: alpha(from maroon / 0.5);
     }
   }
 
