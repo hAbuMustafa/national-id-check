@@ -141,9 +141,9 @@
           <td
             class="checksum"
             class:error={!values?.checks.result}
-            title={!values?.checks.result ? `${values?.checks.calculatedChecksum}` : null}
+            title={String(values?.checks.calculatedChecksum)}
           >
-            {extracted.checksum}
+            {values.checks.result ? '✅' : '❌'}
           </td>
         </tr>
       </tbody>
