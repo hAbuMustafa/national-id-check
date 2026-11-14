@@ -94,16 +94,16 @@
   />
 </label>
 
-{#if nationalID.length === 14 && (!extracted || !values?.checks.result)}
-  <div class="error">
-    {t('incorrectNumber')}
-  </div>
-{/if}
-
 <div class="result">
-  {#if nationalID.length === 14 && extracted === undefined}
+  {#if nationalID.length === 14 && (!extracted || !values?.checks.result)}
+    <div class="error">
+      {t('incorrectNumber')}
+    </div>
+  {/if}
+
+  {#if nationalID.length === 14 && !extracted}
     <p class="error">{t('incorrectNumber')}</p>
-  {:else if nationalID.length === 14 && extracted !== undefined}
+  {:else if nationalID.length === 14 && extracted}
     <table>
       <thead>
         <tr>
@@ -182,8 +182,19 @@
     text-align: center;
   }
 
-  table {
+  .result {
     margin-block-start: 1rem;
+    display: grid;
+    gap: 1rem;
+
+    text-align: center;
+
+    @media (width >= 700px) {
+      padding-inline: 20vw;
+    }
+  }
+
+  table {
     border-collapse: collapse;
 
     thead > tr {
