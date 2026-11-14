@@ -98,35 +98,42 @@
   {#if nationalID.length === 14 && extracted === undefined}
     <p class="error">{t('incorrectNumber')}</p>
   {:else if nationalID.length === 14 && extracted !== undefined}
-    <dl>
-      <dt>{t('birthdate')}</dt>
-      <dd>
-        {values!.birthdate.toString()}
-      </dd>
-
-      <dt>{t('age')}</dt>
-      <dd>{values!.age.years} {t('years')}</dd>
-      <dd>{values!.age.months} {t('months')}</dd>
-      <dd>{values!.age.days} {t('days')}</dd>
-
-      <dt>{t('birthGov')}</dt>
-      <dd>
-        {t(governorateCodes[extracted.governorate])}
-      </dd>
-
-      <dt>Gender</dt>
-      <dd>
-        {Number(extracted.gender) % 2 === 0 ? `${t('female')} ♀️` : `${t('male')} ♂️`}
-      </dd>
-
-      <dt>{t('checksum')}</dt>
-      <dd
-        class:error={!values?.checks.result}
-        title={!values?.checks.result ? `${values?.checks.calculatedChecksum}` : null}
-      >
-        {extracted.checksum}
-      </dd>
-    </dl>
+    <table>
+      <thead>
+        <tr>
+          <th>{t('birthdate')}</th>
+          <th>{t('age')}</th>
+          <th>{t('birthGov')}</th>
+          <th>{t('gender')}</th>
+          <th>{t('checksum')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{values!.birthdate.toString()}</td>
+          <td>
+            {values!.age.years}
+            {t('years')}
+            {values!.age.months}
+            {t('months')}
+            {values!.age.days}
+            {t('days')}
+          </td>
+          <td>{t(governorateCodes[extracted.governorate])}</td>
+          <td
+            >{Number(extracted.gender) % 2 === 0
+              ? `${t('female')} ♀️`
+              : `${t('male')} ♂️`}</td
+          >
+          <td
+            class:error={!values?.checks.result}
+            title={!values?.checks.result ? `${values?.checks.calculatedChecksum}` : null}
+          >
+            {extracted.checksum}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   {/if}
 </div>
 
@@ -169,8 +176,20 @@
     text-align: center;
   }
 
-  dt {
-    margin-block-start: 2rem;
+  table {
+    margin-block-start: 1rem;
+    border-collapse: collapse;
+
+    thead > tr {
+      background-color: alpha(from royalblue / 0.5);
+    }
+
+    th,
+    td {
+      border: 1px solid light-dark(black, lightgray);
+      padding: 0.25rem 0.5rem;
+      text-align: center;
+    }
   }
 
   .error {
