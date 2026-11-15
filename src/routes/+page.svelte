@@ -151,6 +151,13 @@
   {/if}
 </div>
 
+<footer>
+  <details>
+    <summary><small>{t('whatIsThis')}</small></summary>
+    {@html t('about')}
+  </details>
+</footer>
+
 <style>
   nav {
     position: relative;
@@ -192,7 +199,6 @@
   }
 
   .wrapper {
-    margin-block-start: 1rem;
     display: grid;
     gap: 1rem;
 
@@ -240,6 +246,12 @@
       padding: 0.25rem 0.5rem;
       text-align: center;
     }
+  }
+
+  footer {
+    position: absolute;
+    inset-block-end: 0;
+    padding: 1rem;
   }
 
   .error {
