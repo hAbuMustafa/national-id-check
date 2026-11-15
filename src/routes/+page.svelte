@@ -4,6 +4,8 @@
 
   import Valid from '@lucide/svelte/icons/check-check';
   import Invalid from '@lucide/svelte/icons/x';
+  import Male from '@lucide/svelte/icons/mars';
+  import Female from '@lucide/svelte/icons/venus';
 
   import { governorateCodes } from '#lib/utils/governorate-codes.ts';
   import {
@@ -100,8 +102,7 @@
       maxlength="14"
       bind:value={nationalID}
       autofocus
-      onfocus={(e) => e.currentTarget.select()}
-    />
+      onfocus={(e) => e.currentTarget.select()} />
   </label>
 
   {#if nationalID.length === 14 && (!extracted || !values || !values?.checks.result)}
@@ -140,16 +141,19 @@
             {t('days')}
           </td>
           <td class="birth-governorate">{t(governorateCodes[extracted.governorate])}</td>
-          <td class="gender"
-            >{Number(extracted.gender) % 2 === 0
-              ? `${t('female')} ♀️`
-              : `${t('male')} ♂️`}</td
-          >
+          <td class="gender">
+            {Number(extracted.gender) % 2 === 0 ? `${t('female')}` : `${t('male')}`}
+
+            {#if Number(extracted.gender) % 2 === 0}
+              <Female color="pink" size="1rem" />
+            {:else}
+              <Male color="dodgerblue" size="1rem" />
+            {/if}
+          </td>
           <td
             class="checksum"
             class:error={!values?.checks.result}
-            title={String(values?.checks.calculatedChecksum)}
-          >
+            title={String(values?.checks.calculatedChecksum)}>
             {#if values.checks.result}
               <Valid color="green" />
             {:else}
