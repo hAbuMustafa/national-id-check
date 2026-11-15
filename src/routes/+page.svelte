@@ -2,6 +2,9 @@
   import * as en from '#lib/assets/i18n/en.ts';
   import * as ar from '#lib/assets/i18n/ar.ts';
 
+  import Valid from '@lucide/svelte/icons/check-check';
+  import Invalid from '@lucide/svelte/icons/x';
+
   import { governorateCodes } from '#lib/utils/governorate-codes.ts';
   import {
     egyptianNationalIdPattern,
@@ -147,7 +150,11 @@
             class:error={!values?.checks.result}
             title={String(values?.checks.calculatedChecksum)}
           >
-            {values.checks.result ? '✅' : '❌'}
+            {#if values.checks.result}
+              <Valid color="green" />
+            {:else}
+              <Invalid color="red" />
+            {/if}
           </td>
         </tr>
       </tbody>
