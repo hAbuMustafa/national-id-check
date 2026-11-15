@@ -1,7 +1,4 @@
 <script lang="ts">
-  import * as en from '#lib/assets/i18n/en.ts';
-  import * as ar from '#lib/assets/i18n/ar.ts';
-
   import Valid from '@lucide/svelte/icons/check-check';
   import Invalid from '@lucide/svelte/icons/x';
   import Male from '@lucide/svelte/icons/mars';
@@ -14,37 +11,8 @@
   } from '#lib/utils/patterns.ts';
   import { verifyEgyptianNationalId } from '#lib/utils/validator.ts';
   import { page } from '$app/state';
-
-  type Dictionary<A, B> = {
-    [K in keyof A | keyof B]: K extends keyof A & keyof B
-      ? A[K] | B[K]
-      : K extends keyof B
-        ? B[K]
-        : K extends keyof A
-          ? A[K]
-          : never;
-  };
-
-  let isArabic = $state(page.url.searchParams.has('ar'));
-
-  let dictionary: Dictionary<typeof ar.default, typeof en.default> = $derived(
-    isArabic ? ar.default : en.default,
-  );
-
-  function t(key: keyof typeof dictionary, params?: Record<string, unknown>): string {
-    let msg = dictionary[key] ?? key;
-
-    if (params) {
-      for (const [k, v] of Object.entries(params))
-        msg = msg.replaceAll(`{${k}}`, String(v));
-    }
-
-    return msg;
-  }
-
-  $effect(() => {
-    document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
-  });
+  import { t } from '#lib/assets/i18n/localization.svelte.ts';
+  import LanguageSwitch from '#lib/components/LanguageSwitch.svelte';
 
   let nationalID = $state(page.url.searchParams.get('id') ?? '');
 
@@ -78,16 +46,6 @@
 <svelte:head>
   <title>{t('title')}</title>
 </svelte:head>
-
-<nav>
-  <label title={t('toggleLanguage')}>
-    <span class="labels">
-      <span class="en">En</span>
-      <span class="ar">ع</span>
-    </span>
-    <input type="checkbox" bind:checked={isArabic} />
-  </label>
-</nav>
 
 <div class="wrapper">
   <h1>{t('title')}</h1>
@@ -173,42 +131,9 @@
   </details>
 </footer>
 
+<LanguageSwitch />
+
 <style>
-  nav {
-    position: relative;
-
-    .labels {
-      display: inline-block;
-      position: absolute;
-      inset-inline-end: 0;
-      margin-block-end: 1rem;
-      background-color: light-dark(alpha(from gray / 0.4), alpha(from #fff / 0.1));
-      border-radius: 4px;
-      padding: 0.25rem;
-    }
-
-    input {
-      display: none;
-    }
-
-    span {
-      border-radius: 4px;
-      padding: 0.25rem;
-    }
-
-    &:has(input:checked) {
-      .ar {
-        background-color: light-dark(gray, alpha(from #fff / 0.1));
-      }
-    }
-
-    &:has(input:not(:checked)) {
-      .en {
-        background-color: light-dark(gray, alpha(from #fff / 0.1));
-      }
-    }
-  }
-
   input[type='text'] {
     text-align: center;
   }
