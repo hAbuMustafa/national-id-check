@@ -70,6 +70,10 @@
   });
 </script>
 
+<svelte:head>
+  <title>{t('title')}</title>
+</svelte:head>
+
 <nav>
   <label title={t('toggleLanguage')}>
     <span class="labels">
