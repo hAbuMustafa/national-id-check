@@ -13,6 +13,7 @@
   import { page } from '$app/state';
   import { t } from '#lib/assets/i18n/localization.svelte.ts';
   import LanguageSwitch from '#lib/components/LanguageSwitch.svelte';
+  import Bookmarklet from '#lib/components/Bookmarklet.svelte';
 
   let nationalID = $state(page.url.searchParams.get('id') ?? '');
 
@@ -132,6 +133,7 @@
 </footer>
 
 <LanguageSwitch />
+<Bookmarklet />
 
 <style>
   input[type='text'] {
