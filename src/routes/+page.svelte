@@ -14,6 +14,7 @@
   import { t } from '#lib/assets/i18n/localization.svelte.ts';
   import LanguageSwitch from '#lib/components/LanguageSwitch.svelte';
   import Bookmarklet from '#lib/components/Bookmarklet.svelte';
+  import { getRandomNationalID } from '#lib/utils/randomize.ts';
 
   let nationalID = $state(page.url.searchParams.get('id') ?? '');
 
@@ -56,7 +57,7 @@
     <!-- svelte-ignore a11y_autofocus -->
     <input
       type="text"
-      placeholder="25012030200552"
+      placeholder="{t('example')}: '{getRandomNationalID()}'"
       inputmode="numeric"
       maxlength="14"
       bind:value={nationalID}

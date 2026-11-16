@@ -1,6 +1,7 @@
 export default {
   title: 'Egyptian National ID Number Checker',
   nationalIdNumber: 'National ID Number',
+  example: 'e.g.',
   birthdate: 'Birthdate',
   age: 'Age',
   birthGov: 'Birth Governorate',

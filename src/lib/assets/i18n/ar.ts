@@ -1,6 +1,7 @@
 export default {
   title: 'فحص صحة الرقم القومي المصري',
   nationalIdNumber: 'الرقم القومي',
+  example: 'مثلا',
   birthdate: 'تاريخ الميلاد',
   age: 'العمر',
   years: 'سنة',
