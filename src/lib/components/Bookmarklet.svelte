@@ -7,7 +7,8 @@
 
   let copied = $state(false);
 
-  const script = `javascript: window.open(\`https://habumustafa.github.io/national-id-check/?ar&id=\${prompt("${t('nationalIdNumber')}:") ?? ''}\`, '_blank');`;
+  const script = `javascript: (function navigateToValidate() { const ancElem = document.createElement('a'); ancElem.target = '_blank'; ancElem.href = \`https://habumustafa.github.io/national-id-check/?ar&id=\${prompt('${t('nationalIdNumber')}:') ?? '292'}\`; document.body.appendChild(ancElem); ancElem.click(); document.body.removeChild(ancElem);})()
+`;
 
   function copyScript() {
     navigator.clipboard.writeText(script);
