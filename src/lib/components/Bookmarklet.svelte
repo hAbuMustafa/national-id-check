@@ -7,7 +7,7 @@
 
   let copied = $state(false);
 
-  const script = `javascript: window.open(\`https://habumustafa.github.io/national-id-check/?ar&id=\${prompt("%D8%A7%D9%84%D8%B1%D9%82%D9%85 %D8%A7%D9%84%D9%82%D9%88%D9%85%D9%8A:") ?? ''}\`, '_blank');`;
+  const script = `javascript: window.open(\`https://habumustafa.github.io/national-id-check/?ar&id=\${prompt("${t('nationalIdNumber')}:") ?? ''}\`, '_blank');`;
 
   function copyScript() {
     navigator.clipboard.writeText(script);
