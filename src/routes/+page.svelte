@@ -36,9 +36,9 @@
 
       const age = birthdate.until(Temporal.Now.plainDateISO(), { largestUnit: 'year' });
 
-      const checks = verifyEgyptianNationalId(nationalID);
+      const checksum = verifyEgyptianNationalId(nationalID);
 
-      return { birthdate, age, checks };
+      return { birthdate, age, checksum };
     } catch (err) {
       return;
     }
@@ -65,7 +65,7 @@
       onfocus={(e) => e.currentTarget.select()} />
   </label>
 
-  {#if nationalID.length === 14 && (!extracted || !values || !values?.checks.result)}
+  {#if nationalID.length === 14 && (!extracted || !values || !values?.checksum.isValid)}
     <div class="error">
       {t('incorrectNumber')}
     </div>
@@ -112,9 +112,9 @@
           </td>
           <td
             class="checksum"
-            class:error={!values?.checks.result}
-            title={String(values?.checks.calculatedChecksum)}>
-            {#if values.checks.result}
+            class:error={!values?.checksum.isValid}
+            title={String(values?.checksum.calculatedChecksum)}>
+            {#if values.checksum.isValid}
               <Valid color="green" />
             {:else}
               <Invalid color="red" />

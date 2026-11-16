@@ -12,7 +12,7 @@
 export function verifyEgyptianNationalId(num: string) {
   const numList = num.split('').map((n) => Number(n));
 
-  const checksum = numList.pop()!;
+  const providedChecksum = numList.pop()!;
 
   let sum = 0;
 
@@ -28,5 +28,9 @@ export function verifyEgyptianNationalId(num: string) {
 
   const calculatedChecksum = modulus === 0 ? 1 : modulus;
 
-  return { checksum, calculatedChecksum, result: calculatedChecksum === checksum };
+  return {
+    providedChecksum,
+    calculatedChecksum,
+    isValid: calculatedChecksum === providedChecksum,
+  };
 }
