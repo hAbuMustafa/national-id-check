@@ -14,15 +14,14 @@ export function verifyEgyptianNationalId(num: string) {
 
   const providedChecksum = numList.pop()!;
 
-  let sum = 0;
-
   numList.reverse();
 
   const weights = [2, 3, 4, 5, 6, 7];
 
-  for (let i = 0; i < numList.length; i++) {
-    sum += numList.at(i)! * weights[i % weights.length];
-  }
+  const sum = numList.reduce(
+    (prev, curr, i) => prev + curr * weights[i % weights.length],
+    0,
+  );
 
   const modulus = (11 - (sum % 11)) % 11;
 
